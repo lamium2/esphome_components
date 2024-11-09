@@ -22,8 +22,8 @@ GAIN = {
 
 
 def validate_gain(value):
-    if isinstance(value, float):
-        value = f"{value:0f}"
+    if isinstance(value, int):
+        value = int(value)
     elif not isinstance(value, str):
         raise cv.Invalid(f'invalid gain "{value}"')
 
