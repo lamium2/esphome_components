@@ -22,11 +22,6 @@ GAIN = {
 
 
 def validate_gain(value):
-    if isinstance(value, int):
-        value = int(value)
-    elif not isinstance(value, str):
-        raise cv.Invalid(f'invalid gain "{value}"')
-
     return cv.enum(GAIN)(value)
 
 
