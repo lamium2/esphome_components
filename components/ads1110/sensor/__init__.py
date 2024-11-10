@@ -9,7 +9,7 @@ from esphome.const import (
     UNIT_VOLT,
     CONF_ID,
 )
-from . import ads1110_ns, ADS1110Component, CONF_ADS1110_ID
+from .. import ads1110_ns, ADS1110Component, CONF_ADS1110_ID
 
 AUTO_LOAD = ["voltage_sampler"]
 DEPENDENCIES = ["ads1110"]
@@ -31,27 +31,36 @@ RESOLUTION = {
 }
 
 ADS1110Sensor = ads1110_ns.class_(
-    "ADS1110Sensor", sensor.Sensor, cg.PollingComponent, voltage_sampler.VoltageSampler
+    "ADS1110Sensor",
+    sensor.Sensor,
+    cg.PollingComponent,
+    voltage_sampler.VoltageSampler,
+    cg.Parented.template(ADS1110Component),
 )
 
-CONFIG_SCHEMA = (
-    sensor.sensor_schema(
-        ADS1110Sensor,
-        unit_of_measurement=UNIT_VOLT,
-        accuracy_decimals=3,
-        device_class=DEVICE_CLASS_VOLTAGE,
-        state_class=STATE_CLASS_MEASUREMENT,
-    )
-    .extend(
-        {
-            cv.GenerateID(CONF_ADS1110_ID): cv.use_id(ADS1110Component),
-            cv.Required(CONF_GAIN): cv.enum(GAIN, string=True),
-            cv.Optional(CONF_RESOLUTION, default="16_BITS"): cv.enum(
-                RESOLUTION, upper=True, space="_"
-            ),
-        }
-    )
-    .extend(cv.polling_component_schema("60s"))
+TYPE_ADC = "adc"
+
+CONFIG_SCHEMA = cv.typed_schema(
+    {
+        TYPE_ADC: sensor.sensor_schema(
+            ADS1110Sensor,
+            unit_of_measurement=UNIT_VOLT,
+            accuracy_decimals=3,
+            device_class=DEVICE_CLASS_VOLTAGE,
+            state_class=STATE_CLASS_MEASUREMENT,
+        )
+        .extend(
+            {
+                cv.GenerateID(CONF_ADS1110_ID): cv.use_id(ADS1110Component),
+                cv.Required(CONF_GAIN): cv.enum(GAIN, string=True),
+                cv.Optional(CONF_RESOLUTION, default="16_BITS"): cv.enum(
+                    RESOLUTION, upper=True, space="_"
+                ),
+            }
+        )
+        .extend(cv.polling_component_schema("60s"))
+    },
+    default_type=TYPE_ADC,
 )
 
 
