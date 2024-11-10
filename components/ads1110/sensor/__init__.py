@@ -56,12 +56,10 @@ CONFIG_SCHEMA = (
 
 
 async def to_code(config):
-    paren = await cg.get_variable(config[CONF_ADS1110_ID])
-    var = cg.new_Pvariable(config[CONF_ID], paren)
+    var = cg.new_Pvariable(config[CONF_ID])
     await sensor.register_sensor(var, config)
     await cg.register_component(var, config)
+    await cg.register_parented(var, config[CONF_ADS1110_ID])
 
     cg.add(var.set_gain(config[CONF_GAIN]))
     cg.add(var.set_resolution(config[CONF_RESOLUTION]))
-
-    cg.add(paren.register_sensor(var))
