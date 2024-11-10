@@ -16,7 +16,7 @@ CONFIG_SCHEMA = (
     cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(ADS1110Component),
-            cv.Optional(CONF_CONTINUOUS_MODE, default=False): cv.boolean,
+            cv.Optional(CONF_CONTINUOUS_MODE, default=True): cv.boolean,
         }
     )
     .extend(cv.COMPONENT_SCHEMA)
