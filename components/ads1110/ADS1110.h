@@ -9,12 +9,9 @@ namespace esphome {
 namespace ads1110 {
 
     const uint8_t DEFAULT_CONFIG   =  12;      // B00001100 (16-BIT, 15 SPS, GAIN x1, CONTINUOUS)
-    const uint8_t DEFAULT_DATA     =   0;      // default value of Raw Data registers
+    const uint16_t DEFAULT_DATA     =   0;      // default value of Raw Data registers
     const uint8_t START_CONVERSION = 128;      // B10000000 (employed in 'Single-Shot' Conversion Mode)
-    const uint8_t COM_SUCCESS      =   0;      // I2C Communication Success (No Error)
-    const uint8_t MIN_CON_TIME     =   5;      // minimum ADC Comversion time (in mS)
     const uint8_t NUM_BYTES        =   3;      // fixed number of bytes requested from the device
-    const int  MAX_NUM_ATTEMPTS =   3;      // number of attempts to get new data from device
 
     enum gain_t {
         GAIN_MASK = 0x03,      // 3 - B00000011

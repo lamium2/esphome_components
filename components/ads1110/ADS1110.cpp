@@ -19,26 +19,12 @@ void ADS1110Component::setup() {
 
   ESP_LOGCONFIG(TAG, "Configuring ADS1110...");
 
-  uint8_t config = 0;
-  // Clear single-shot bit
-  //        0b0xxxxxxx
-  config |= 0b00000000;
-  // Setup Gain
-  //        0bxxxxxx00
-  config |= GAIN_1;
-
-  if (this->continuous_mode_) {
-    // Set continuous mode
-    //        0bxxx0xxxx
-    config |= CONT;
-  } else {
+  uint8_t config = DEFAULT_CONFIG;
+    if (!this->continuous_mode_) {
     // Set singleshot mode
     //        0bxxx1xxxx
     config |= SINGLE;
   }
-  // Set data rate
-  //        0B00001100
-  config |= SPS_15;
 
   if (!this->write_byte(ADS1110_REGISTER_CONFIG, config)) {
     this->mark_failed();
