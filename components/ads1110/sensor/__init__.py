@@ -52,13 +52,13 @@ CONFIG_SCHEMA = cv.typed_schema(
         .extend(
             {
                 cv.GenerateID(CONF_ADS1110_ID): cv.use_id(ADS1110Component),
-                cv.Required(CONF_GAIN): cv.enum(GAIN, default="1", string=True),
+                cv.Required(CONF_GAIN): cv.enum(GAIN, string=True),
                 cv.Optional(CONF_RESOLUTION, default="16_BITS"): cv.enum(
                     RESOLUTION, upper=True, space="_"
                 ),
             }
         )
-        .extend(cv.polling_component_schema("60s"))
+        .extend(cv.polling_component_schema("120s"))
     },
     default_type=TYPE_ADC,
 )
