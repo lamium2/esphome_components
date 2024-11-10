@@ -40,7 +40,7 @@ void ADS1110Component::setup() {
   //        0B00001100
   config |= SPS_15;
 
-  if (!this->write_byte_8(ADS1110_REGISTER_CONFIG, config)) {
+  if (!this->write_byte(ADS1110_REGISTER_CONFIG, config)) {
     this->mark_failed();
     return;
   }
@@ -73,7 +73,7 @@ float ADS1110Component::request_measurement(gain_t gain, res_t resolution) {
   }
 
   if (!this->continuous_mode_ || this->prev_config_ != config) {
-    if (!this->write_byte_8(ADS1110_REGISTER_CONFIG, config)) {
+    if (!this->write_byte(ADS1110_REGISTER_CONFIG, config)) {
       this->status_set_warning();
       return NAN;
     }
@@ -99,7 +99,7 @@ float ADS1110Component::request_measurement(gain_t gain, res_t resolution) {
   }
 
   uint16_t raw_conversion;
-  if (!this->read_byte_16(ADS1115_REGISTER_CONVERSION, &raw_conversion)) {
+  if (!this->read_byte_16(ADS1110_REGISTER_CONVERSION, &raw_conversion)) {
     this->status_set_warning();
     return NAN;
   }
