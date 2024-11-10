@@ -6,7 +6,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/voltage_sampler/voltage_sampler.h"
 
-#include "../ads1110.h"
+#include "./ads1110.h"
 
 namespace esphome {
 namespace ads1110 {
