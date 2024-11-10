@@ -87,9 +87,9 @@ float ADS1110Component::request_measurement(gain_t gain, res_t resolution) {
     // can we use the rdy pin to trigger when a conversion is done?
     /* if (!this->continuous_mode_) {
       uint32_t start = millis();
-      while (this->read_byte_16(ADS1115_REGISTER_CONFIG, &config) && (config >> 15) == 0) {
+      while (this->read_byte_16(ADS1110_REGISTER_CONFIG, &config) && (config >> 15) == 0) {
         if (millis() - start > 100) {
-          ESP_LOGW(TAG, "Reading ADS1115 timed out");
+          ESP_LOGW(TAG, "Reading ADS1110 timed out");
           this->status_set_warning();
           return NAN;
         }
