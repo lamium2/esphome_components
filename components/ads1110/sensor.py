@@ -54,9 +54,10 @@ CONFIG_SCHEMA = (
         {
             cv.GenerateID(): cv.declare_id(ADS1110Sensor),
             cv.GenerateID(CONF_ADS1110_ID): cv.use_id(ADS1110Component),
-            cv.Required(CONF_GAIN): validate_gain,
+            cv.Required(CONF_GAIN): cv.enum(GAIN),
             cv.Optional(CONF_RESOLUTION, default="16_BITS"): cv.enum(
                 RESOLUTION, upper=True, space="_"
+            ),
         }
     )
     .extend(cv.polling_component_schema("60s"))
