@@ -38,7 +38,7 @@ void ADS1100Component::setup() {
   }
   // Set data rate
   //        0B00001100
-  config |= SPS_15;
+  config |= SPS_8;
 
   if (!this->write_byte(ADS1100_REGISTER_CONFIG, config)) {
     this->mark_failed();
