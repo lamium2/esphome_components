@@ -11,6 +11,7 @@ from esphome.const import (
 )
 from . import ads1110_ns, ADS1110Component
 
+AUTO_LOAD = ["voltage_sampler"]
 DEPENDENCIES = ["ads1110"]
 
 gain_t = ads1110_ns.enum("gain_t")
@@ -33,9 +34,9 @@ ADS1110Sensor = ads1110_ns.class_(
     "ADS1110Sensor", sensor.Sensor, cg.PollingComponent, voltage_sampler.VoltageSampler
 )
 
-CONF_ADS1110_ID = "ads1110_id"
 CONFIG_SCHEMA = (
     sensor.sensor_schema(
+        ADS1110Sensor,
         unit_of_measurement=UNIT_VOLT,
         accuracy_decimals=3,
         device_class=DEVICE_CLASS_VOLTAGE,
@@ -43,7 +44,6 @@ CONFIG_SCHEMA = (
     )
     .extend(
         {
-            cv.GenerateID(): cv.declare_id(ADS1110Sensor),
             cv.GenerateID(CONF_ADS1110_ID): cv.use_id(ADS1110Component),
             cv.Required(CONF_GAIN): cv.enum(GAIN, string=True),
             cv.Optional(CONF_RESOLUTION, default="16_BITS"): cv.enum(

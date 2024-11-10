@@ -4,13 +4,14 @@ from esphome.components import i2c
 from esphome.const import CONF_ID
 
 DEPENDENCIES = ["i2c"]
-AUTO_LOAD = ["sensor", "voltage_sampler"]
 MULTI_CONF = True
 
 ads1110_ns = cg.esphome_ns.namespace("ads1110")
 ADS1110Component = ads1110_ns.class_("ADS1110Component", cg.Component, i2c.I2CDevice)
 
 CONF_CONTINUOUS_MODE = "continuous_mode"
+CONF_ADS1110_ID = "ads1110_id"
+
 CONFIG_SCHEMA = (
     cv.Schema(
         {
