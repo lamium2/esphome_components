@@ -51,11 +51,6 @@ namespace ads1110 {
         RES_16   = 0x0C         // SPS 12 - B00001100 (Default)       // 16-BIT Resolution (Default)
     };
 
-    enum vref_t {
-        INT_REF =    0,        // Inernal Reference:  Pin Vin- is connected to GND (Default)
-        EXT_REF = 2048         // External Reference: Pin Vin- is connected to 2.048V source
-    };
-
 class ADS1110Component : public Component, public i2c::I2CDevice {
  public:
   void setup() override;
