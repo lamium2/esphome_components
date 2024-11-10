@@ -9,7 +9,7 @@ from esphome.const import (
     UNIT_VOLT,
     CONF_ID,
 )
-from . import ads1110_ns, ADS1110Component
+from . import ads1110_ns, ADS1110Component, CONF_ADS1110_ID
 
 AUTO_LOAD = ["voltage_sampler"]
 DEPENDENCIES = ["ads1110"]
