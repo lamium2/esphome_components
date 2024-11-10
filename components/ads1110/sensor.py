@@ -21,22 +21,13 @@ GAIN = {
     "8": gain_t.GAIN_8,
 }
 
-min_code_t = ads1110_ns.enum("min_code_t")
+res_t = ads1110_ns.enum("res_t")
 RESOLUTION = {
-    "16_BITS": min_code_t.RES_16,
-    "15_BITS": min_code_t.RES_15,
-    "14_BITS": min_code_t.RES_14,
-    "12_BITS": min_code_t.RES_12,
+    "16_BITS": res_t.RES_16,
+    "15_BITS": res_t.RES_15,
+    "14_BITS": res_t.RES_14,
+    "12_BITS": res_t.RES_12,
 }
-
-def validate_gain(value):
-    if isinstance(value, float):
-        value = f"{value:0.03f}"
-    elif not isinstance(value, str):
-        raise cv.Invalid(f'invalid gain "{value}"')
-
-    return cv.enum(GAIN)(value)
-
 
 ADS1110Sensor = ads1110_ns.class_(
     "ADS1110Sensor", sensor.Sensor, cg.PollingComponent, voltage_sampler.VoltageSampler
@@ -54,7 +45,7 @@ CONFIG_SCHEMA = (
         {
             cv.GenerateID(): cv.declare_id(ADS1110Sensor),
             cv.GenerateID(CONF_ADS1110_ID): cv.use_id(ADS1110Component),
-            cv.Required(CONF_GAIN): cv.enum(GAIN),
+            cv.Required(CONF_GAIN): cv.enum(GAIN, string=True),
             cv.Optional(CONF_RESOLUTION, default="16_BITS"): cv.enum(
                 RESOLUTION, upper=True, space="_"
             ),

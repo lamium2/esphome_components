@@ -45,10 +45,10 @@ namespace ads1110 {
     };
 
     enum res_t {
-        RES_12   = 0x00        // SPS  0 - B00000000,                // 12-BIT Resolution
-        RES_14   = 0x04,       // SPS  4 - B00000100,                // 14-BIT Resolution
-        RES_15   = 0x08,       // SPS  8 - B00001000,                // 15-BIT Resolution
-        RES_16   = 0x0C,       // SPS 12 - B00001100 (Default)       // 16-BIT Resolution (Default)
+        RES_12   = 0x00,        // SPS  0 - B00000000,                // 12-BIT Resolution
+        RES_14   = 0x04,        // SPS  4 - B00000100,                // 14-BIT Resolution
+        RES_15   = 0x08,        // SPS  8 - B00001000,                // 15-BIT Resolution
+        RES_16   = 0x0C         // SPS 12 - B00001100 (Default)       // 16-BIT Resolution (Default)
     };
 
     enum vref_t {
